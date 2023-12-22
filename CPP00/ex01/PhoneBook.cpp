@@ -82,7 +82,17 @@ void	PhoneBook::print_detail(void)
 		std::cout << ">> BACK <<" << '\n';
 		return ;
 	}
-	int	i = atoi(input_str.c_str());
+	int	i = 0;
+	while (input_str[i])
+	{
+		if(std::isalpha(input_str[i]) || input_str[i] == ' ')
+		{
+			std::cout << ">> Invalid <<" << '\n' << ">> BACK <<" << '\n';
+			return ;
+		}
+		i++;
+	}
+	i = atoi(input_str.c_str());
 	if (i < 1 || i > 8 || i > (pb_max_i + 1))
 	{
 		std::cout << ">> Invalid <<" << '\n' << ">> BACK <<" << '\n';

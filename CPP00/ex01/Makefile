@@ -8,8 +8,12 @@ SRCS		=	main.cpp PhoneBook.cpp Contact.cpp
 
 OBJS		=	${SRCS:.cpp=.o}
 
+HEADERS		=	PhoneBook.hpp Contact.hpp
+
 ${NAME}: ${OBJS}
 	${CXX} ${CXXFLAGS} -o ${NAME} ${OBJS}
+
+${OBJS} : ${HEADERS}
 
 .PHONY: all clean fclean re
 all: ${NAME}
