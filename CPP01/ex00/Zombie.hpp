@@ -11,7 +11,7 @@ class Zombie
 	public:
 		Zombie(std::string name);
 		~Zombie(void);
-		void	announance(void);
+		void	announce(void);
 };
 
 Zombie*			newZombie( std::string name );

@@ -1,45 +1,64 @@
 #include <iostream>
 #include <fstream>
 
-// void find_and_replace()
+static std::string	outname_create(std::string filename)
+{
+	size_t	dot_index = filename.find_last_of('.');
+	std::string	outname = filename.substr(0, dot_index);
+	std::string	extension = filename.substr(dot_index);
+	outname.append(".replace" + extension);
+	return (outname);
+}
+
+size_t	find_index(std::string line, std::string s1_find, size_t i)
+{
+	return(line.find(s1_find, i));
+}
+
+static void	replace_s1_with_s2(std::string s1_find, std::string s2_replace, std::ifstream &infile, std::ofstream &outfile)
+{
+	size_t	i;
+	std::string	line;
+	std::string	line_tmp;
+	while(std::getline(infile, line))
+	{
+		i = 0;
+		line_tmp = "";
+		while(find_index(line, s1_find, i) != std::string::npos)
+		{
+			line_tmp = line.substr(0, i);
+			line_tmp = line_tmp + s2_replace + line.substr(i + s1_find.length());
+			line = line_tmp;
+			i = i + s2_replace.length();
+		}
+		outfile << line << std::endl;
+	}
+	infile.close();
+	outfile.close();
+}
+
+static void err_msg(std::string msg)
+{
+	std::cerr << msg << std::endl;
+}
 
 int main(int argc, char **argv)
 {
 	if (argc != 4)
-	{
-		std::cerr << "incorrect input" << '\n';
-		return (1);
-	}
-	std::string filename = argv[1];
-	std::string s1_find = argv[2];
-	std::string s2_replace = argv[3];
+		return(err_msg("incorrect input"), 1);
+	std::string filename = (std::string)argv[1];
+	std::string s1_find = (std::string)argv[2];
+	std::string s2_replace = (std::string)argv[3];
 	if (s1_find.empty() || s2_replace.empty())
-	{
-		std::cerr << "invalid input" << '\n';
-		return (1);
-	}
-	std::ifstream	infile(filename);
-	std::ofstream	outfile(filename + ".replace");
-	if (infile.fail() || outfile.fail())
-	{
-		std::cerr << "incorrect file" << '\n';
-		return (1);
-	}
-	std::string	read_str = "";
-	while(std::getline(infile, read_str))
-	{
-		size_t	read_index = 0;
-		std::string collect_str = "";
-		std::size_t find_index = 0;
-		while ((find_index = read_str.find(s1_find, find_index)) != std::string::npos)
-		{
-			collect_str = read_str.substr(read_index, find_index);
-			read_index = find_index + s1_find.length();
-			collect_str = collect_str + s2_replace;
-			find_index += s1_find.length();
-		}
-		collect_str = collect_str + read_str.substr(read_index, read_str.length());
-		std::cout << collect_str << '\n';
-	}
-
+		return(err_msg("invalid input"), 1);
+	std::ifstream	infile;
+	infile.open(filename.c_str(), std::ios::in);
+	if(!infile.is_open())
+		return(err_msg("open infile failed"), 1);
+	std::ofstream	outfile;
+	std::string	outname = outname_create(filename);
+	outfile.open(outname.c_str(), std::ios::out | std::ios::trunc);
+	if(!outfile.is_open())
+		return(infile.close(), err_msg("open outfile failed"), 1);
+	replace_s1_with_s2(s1_find, s2_replace, infile, outfile);
 }
