@@ -1,20 +1,6 @@
 #include <iostream>
 #include <fstream>
 
-static std::string	outname_create(std::string filename)
-{
-	size_t	dot_index = filename.find_last_of('.');
-	std::string	outname = filename.substr(0, dot_index);
-	std::string	extension = filename.substr(dot_index);
-	outname.append(".replace" + extension);
-	return (outname);
-}
-
-size_t	find_index(std::string line, std::string s1_find, size_t i)
-{
-	return(line.find(s1_find, i));
-}
-
 static void	replace_s1_with_s2(std::string s1_find, std::string s2_replace, std::ifstream &infile, std::ofstream &outfile)
 {
 	size_t	i;
@@ -24,7 +10,7 @@ static void	replace_s1_with_s2(std::string s1_find, std::string s2_replace, std:
 	{
 		i = 0;
 		line_tmp = "";
-		while(find_index(line, s1_find, i) != std::string::npos)
+		while((i = line.find(s1_find, i)) != std::string::npos)
 		{
 			line_tmp = line.substr(0, i);
 			line_tmp = line_tmp + s2_replace + line.substr(i + s1_find.length());
@@ -56,9 +42,18 @@ int main(int argc, char **argv)
 	if(!infile.is_open())
 		return(err_msg("open infile failed"), 1);
 	std::ofstream	outfile;
-	std::string	outname = outname_create(filename);
+	std::string	outname = filename + ".replace";
 	outfile.open(outname.c_str(), std::ios::out | std::ios::trunc);
 	if(!outfile.is_open())
 		return(infile.close(), err_msg("open outfile failed"), 1);
 	replace_s1_with_s2(s1_find, s2_replace, infile, outfile);
 }
+
+// static std::string	outname_create(std::string filename)
+// {
+// 	size_t	dot_index = filename.find_last_of('.');
+// 	std::string	outname = filename.substr(0, dot_index);
+// 	std::string	extension = filename.substr(dot_index);
+// 	outname.append(".replace" + extension);
+// 	return (outname);
+// }
