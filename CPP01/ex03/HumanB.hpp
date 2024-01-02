@@ -9,7 +9,7 @@ class HumanB
 {
 	private:
 		std::string			_name;
-		std::string const	*_weapon;
+		Weapon				*_weapon;
 	public:
 		HumanB(std::string name);
 		~HumanB(void);

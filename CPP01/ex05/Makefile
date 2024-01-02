@@ -1,14 +1,14 @@
-NAME		=	weapon
+NAME		=	harl
 
 CXX			=	c++
 
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-SRCS		=	main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRCS		=	main.cpp Harl.cpp
 
 OBJS		=	${SRCS:.cpp=.o}
 
-HEADERS		=	Weapon.hpp HumanA.hpp HumanB.hpp
+HEADERS		=	Harl.hpp
 
 ${NAME}: ${OBJS}
 	${CXX} ${CXXFLAGS} -o ${NAME} ${OBJS}

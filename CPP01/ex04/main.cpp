@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 
 static void	replace_s1_with_s2(std::string s1_find, std::string s2_replace, std::ifstream &infile, std::ofstream &outfile)
 {
@@ -31,16 +32,16 @@ static void err_msg(std::string msg)
 int main(int argc, char **argv)
 {
 	if (argc != 4)
-		return(err_msg("incorrect input"), 1);
+		return(err_msg("incorrect input: ./replace [filename] [find_str] [replace_str]"), 1);
 	std::string filename = (std::string)argv[1];
 	std::string s1_find = (std::string)argv[2];
 	std::string s2_replace = (std::string)argv[3];
 	if (s1_find.empty() || s2_replace.empty())
-		return(err_msg("invalid input"), 1);
+		return(err_msg("incorrect [str]"), 1);
 	std::ifstream	infile;
 	infile.open(filename.c_str(), std::ios::in);
 	if(!infile.is_open())
-		return(err_msg("open infile failed"), 1);
+		return(err_msg("incorrect infile"), 1);
 	std::ofstream	outfile;
 	std::string	outname = filename + ".replace";
 	outfile.open(outname.c_str(), std::ios::out | std::ios::trunc);

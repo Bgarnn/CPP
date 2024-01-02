@@ -1,18 +1,19 @@
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name): _name(name)
+HumanB::HumanB(std::string name): _name(name), _weapon(NULL)
 {}
 
 HumanB::~HumanB(void)
 {}
 
-void	HumanB::setWeapon(Weapon &type)
+void	HumanB::setWeapon(Weapon &weapon)
 {
-	this->_weapon = &type.getType();
+	this->_weapon = &weapon;
 }
 
 
 void	HumanB::attack(void)
 {
-	std::cout << this->_name << " attacks with their " << *_weapon << '\n';
+	if (this->_weapon != NULL && !this->_weapon->getType().empty())
+		std::cout << this->_name << " attacks with their " << this->_weapon->getType() << std::endl;
 }
