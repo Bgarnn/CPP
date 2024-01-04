@@ -79,9 +79,12 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	{
 		if (this->_HitPoint > 0)
 		{
-			this->_HitPoint += amount;
 			std::cout << GREEN << "ClapTrap " << this->_Name << " has been repaired " << amount << std::endl;
-			this->_EnergeyPoint -= 1;
+			if (this->_HitPoint > UINT_MAX - amount)
+				this->_HitPoint = UINT_MAX;
+			else
+				this->_HitPoint += amount;
+			this->_EnergeyPoint -=1;
 		}
 		else
 			std::cout << GREEN << "ClapTrap " << this->_Name << " does not have enough HP to repair" << std::endl;

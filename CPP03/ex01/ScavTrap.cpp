@@ -45,7 +45,7 @@ ScavTrap	&ScavTrap::operator=(const ScavTrap &obj)
 
 void	ScavTrap::guardGate(void)
 {
-	std::cout << GREEN << "ScavTrap " << this->_Name << " is now in Gate keeper mode" << std::endl;
+	std::cout << CYAN << "ScavTrap " << this->_Name << " is now in Gate keeper mode" << std::endl;
 }
 
 void	ScavTrap::attack(const std::string& target)
