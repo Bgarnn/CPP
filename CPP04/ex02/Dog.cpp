@@ -1,13 +1,13 @@
 #include "Dog.hpp"
 
-Dog::Dog(void) : AAnimal("Dog")
+Dog::Dog(void) : Animal("Dog")
 {
 	this->_brain = new Brain();
 	this->_brain->setIdeas("Woof");
 	std::cout << GREEN << "Derived Dog: [" << this->type << "] created" << std::endl;
 }
 
-Dog::Dog(const Dog &obj) : AAnimal(obj)
+Dog::Dog(const Dog &obj) : Animal(obj)
 {
 	std::cout << GREEN << "Derived Dog [" << this->type << "] copy constructor called" << std::endl;
 	if (this != &obj)

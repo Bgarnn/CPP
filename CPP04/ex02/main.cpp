@@ -4,14 +4,16 @@
 
 int	main(void)
 {
+	// Animal test;
+
 	std::cout << RED << "\n---------------------[Subject example]---------------------\n" << std::endl;
-	const AAnimal* a = new Dog(); 
-	const AAnimal* b = new Cat();
+	const Animal* a = new Dog(); 
+	const Animal* b = new Cat();
 	delete a;
 	delete b;
 
 	std::cout << RED << "\n---------------------[Subject test]---------------------\n" << std::endl;
-	AAnimal *meta[4];
+	Animal *meta[4];
 	for (int i = 0; i < 2; i++)
 		meta[i] = new Cat();
 	for (int i = 2; i < 4; i++)

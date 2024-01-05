@@ -1,13 +1,13 @@
 #include "Cat.hpp"
 
-Cat::Cat(void) : AAnimal("Cat")
+Cat::Cat(void) : Animal("Cat")
 {
 	this->_brain = new Brain();
 	this->_brain->setIdeas("Meow");
 	std::cout << CYAN << "Derived Cat: [" << this->type << "] created" << std::endl;
 }
 
-Cat::Cat(const Cat &obj) : AAnimal(obj)
+Cat::Cat(const Cat &obj) : Animal(obj)
 {
 	std::cout << CYAN << "Derived Cat: [" << this->type << "] copy constructor called" << std::endl;
 	if (this != &obj)
